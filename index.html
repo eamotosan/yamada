@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>無限負荷テストツール</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>無限負荷テストツール</h1>
+    <label for="url">テストするURL:</label>
+    <input type="text" id="url" required>
+    <button id="startTest">テスト開始</button>
+    <button id="stopTest">テスト停止</button>
+    <p id="status"></p>
+
+    <script>
+        let isTesting = false;
+
+        document.getElementById('startTest').addEventListener('click', async function() {
+            const url = document.getElementById('url').value;
+            const status = document.getElementById('status');
+            status.textContent = 'テストを実行中...';
+            isTesting = true;
+
+            async function sendRequest() {
+                while (isTesting) {
+                    const randomString = generateRandomString();
+                    try {
+                        const response = await fetch(`${url}?query=${randomString}`);
+                        if (!response.ok) {
+                            console.error('エラー:', response.status);
+                        }
+                    } catch (error) {
+                        console.error('エラー:', error);
+                    }
+                }
+            }
+
+            // リクエストを並行して送信
+            const requestCount = 15; // 同時に送信するリクエストの数
+            for (let i = 0; i < requestCount; i++) {
+                sendRequest(); // 非同期リクエストを開始
+            }
+        });
+
+        document.getElementById('stopTest').addEventListener('click', function() {
+            isTesting = false;
+            document.getElementById('status').textContent = 'テストが停止しました。';
+        });
+
+        function generateRandomString(length = 10) {
+            const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+            let result = '';
+            for (let i = 0; i < length; i++) {
+                result += characters.charAt(Math.floor(Math.random() * characters.length));
+            }
+            return result;
+        }
+    </script>
+</body>
+</html>
